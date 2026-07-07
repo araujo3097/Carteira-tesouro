@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora NTN-B Principal — Tesouro Direto</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap');
+
+  :root{
+    --bg: #F4F0E6;
+    --card: #FFFFFF;
+    --ink: #16283A;
+    --ink-soft: #5A6B7A;
+    --accent: #A9752F;
+    --accent-soft: #F1E4CC;
+    --line: #E4DCC8;
+    --green: #2E6B4F;
+    --green-soft: #E4EEE7;
+    --red: #A6402E;
+    --red-soft: #F3E4DF;
+    --mono: 'IBM Plex Mono', monospace;
+    --serif: 'Fraunces', serif;
+    --sans: 'IBM Plex Sans', sans-serif;
+  }
+
+  *{ box-sizing: border-box; }
+
+  body{
+    margin:0;
+    min-height:100vh;
+    background:
+      radial-gradient(1200px 600px at 100% -10%, #EFE7D3 0%, transparent 60%),
+      var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    padding: 40px 16px 80px;
+  }
+
+  .wrap{
+    width:100%;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .eyebrow{
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+
+  h1{
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(28px, 4vw, 38px);
+    line-height: 1.1;
+    margin: 0 0 6px 0;
+    letter-spacing: -0.01em;
+  }
+
+  .subtitle{
+    color: var(--ink-soft);
+    font-size: 14.5px;
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+
+  .update-badge{
+    display:inline-flex;
+    align-items:center;
+    gap: 6px;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--green);
+    background: var(--green-soft);
+    padding: 6px 12px;
+    border-radius: 100px;
+    margin-bottom: 24px;
+  }
+  .update-badge.stale{
+    color: var(--ink-soft);
+    background: var(--accent-soft);
+  }
+
+  .card{
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 28px;
+    box-shadow: 0 1px 2px rgba(22,40,58,0.04);
+    margin-bottom: 24px;
+  }
+
+  .card h2{
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 20px;
+    margin: 0 0 4px 0;
+  }
+
+  .card .desc{
+    color: var(--ink-soft);
+    font-size: 13.5px;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+
+  label{
+    display:block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  select, input{
+    width: 100%;
+    font-family: var(--mono);
+    font-size: 15.5px;
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1.5px solid var(--line);
+    background: #FBFAF6;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.15s ease;
+  }
+
+  select:focus, input:focus{ border-color: var(--accent); }
+
+  .row-2{
+    display:grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 14px;
+  }
+
+  .field{ margin-bottom: 18px; }
+
+  .divider{ height:1px; background: var(--line); margin: 22px 0; }
+
+  .result{
+    background: var(--accent-soft);
+    border-radius: 10px;
+    padding: 20px;
+  }
+
+  .result-row{
+    display:flex; justify-content:space-between; align-items:baseline;
+    font-family: var(--mono); font-size: 13px; color: var(--ink-soft);
+    margin-bottom: 6px;
+  }
+  .result-row span:last-child{ color: var(--ink); }
+
+  .result-total{
+    display:flex; justify-content:space-between; align-items:baseline;
+    margin-top: 12px; padding-top: 12px;
+    border-top: 1px dashed #D8C89C;
+  }
+  .result-total .label{ font-size: 12.5px; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.06em; }
+  .result-total .value{ font-family: var(--serif); font-weight: 600; font-size: 26px; }
+
+  .btn{
+    width:100%;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 14.5px;
+    padding: 13px 16px;
+    border-radius: 8px;
+    border: none;
+    background: var(--ink);
+    color: #F4F0E6;
+    cursor: pointer;
+    margin-top: 6px;
+    transition: opacity 0.15s ease;
+  }
+  .btn:hover{ opacity: 0.88; }
+
+  /* Tabs */
+  .tabs{
+    display:flex;
+    gap: 4px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--line);
+  }
+  .tab-btn{
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    background: none;
+    border: none;
+    padding: 10px 4px;
+    margin-right: 22px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    position: relative;
+    top: 1px;
+  }
+  .tab-btn.active{
+    color: var(--ink);
+    border-bottom-color: var(--accent);
+  }
+  .tab-panel{ display:none; }
+  .tab-panel.active{ display:block; }
+
+  table{ width:100%; border-collapse: collapse; font-size: 13.5px; }
+  th{
+    text-align:left;
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--ink-soft);
+    font-weight: 600;
+    padding: 8px 6px;
+    border-bottom: 1.5px solid var(--line);
+  }
+  td{
+    padding: 11px 6px;
+    border-bottom: 1px solid var(--line);
+    font-family: var(--mono);
+  }
+  td.num{ text-align:right; }
+  tfoot td{
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 15px;
+    border-bottom: none;
+    padding-top: 14px;
+  }
+
+  .remove-btn{
+    background:none; border:none; color: var(--red);
+    cursor:pointer; font-family: var(--mono); font-size: 12px;
+    padding: 4px 8px; border-radius: 6px;
+  }
+  .remove-btn:hover{ background: var(--red-soft); }
+
+  .empty-state{
+    text-align:center;
+    padding: 30px 10px;
+    color: var(--ink-soft);
+    font-size: 13.5px;
+  }
+
+  .scenario-controls{
+    display:flex; align-items:center; gap: 12px; margin-bottom: 18px;
+  }
+  .scenario-controls label{ margin:0; white-space: nowrap; }
+  .scenario-controls input[type=range]{
+    flex:1; -webkit-appearance:none; height:4px; border-radius:2px;
+    background: var(--line); outline:none;
+  }
+  .scenario-controls input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none; width:16px; height:16px; border-radius:50%;
+    background: var(--accent); cursor:pointer;
+  }
+  .scenario-controls .pct-val{
+    font-family: var(--mono); font-weight:600; font-size:14px;
+    min-width: 52px; text-align:right;
+  }
+
+  .pos{ color: var(--green); }
+  .neg{ color: var(--red); }
+
+  .footnote{
+    margin-top: 16px;
+    font-size: 11.5px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+  .footnote b{ color: var(--ink); }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="eyebrow">Tesouro Direto · Renda Fixa</div>
+  <h1>Carteira NTN-B Principal</h1>
+  <div class="subtitle">Adicione os títulos que você tem, veja o valor consolidado da carteira e simule cenários de valorização ou desvalorização.</div>
+  <div class="update-badge" id="update-badge">Carregando dados atualizados…</div>
+
+  <!-- ADICIONAR POSIÇÃO -->
+  <div class="card">
+    <h2>Adicionar título</h2>
+    <div class="desc">Escolha o vencimento e a quantidade para ver o valor e incluir na sua carteira.</div>
+
+    <div class="row-2">
+      <div class="field">
+        <label for="vencimento">Vencimento</label>
+        <select id="vencimento"></select>
+      </div>
+      <div class="field">
+        <label for="quantidade">Quantidade</label>
+        <input type="number" id="quantidade" placeholder="Ex: 1,235" step="any" min="0" value="1">
+      </div>
+    </div>
+
+    <div class="result">
+      <div class="result-row"><span>PU de venda (unitário)</span><span id="pu-venda">—</span></div>
+      <div class="result-row"><span>Data de referência</span><span id="data-ref">—</span></div>
+      <div class="result-total">
+        <div class="label">Valor desta posição</div>
+        <div class="value" id="valor-total">R$ 0,00</div>
+      </div>
+    </div>
+
+    <button class="btn" id="btn-adicionar">Adicionar à carteira</button>
+  </div>
+
+  <!-- TABS: CARTEIRA / CENÁRIOS -->
+  <div class="card">
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="carteira">Carteira</button>
+      <button class="tab-btn" data-tab="cenarios">Cenários</button>
+    </div>
+
+    <!-- CARTEIRA -->
+    <div class="tab-panel active" id="tab-carteira">
+      <table>
+        <thead>
+          <tr>
+            <th>Título</th>
+            <th class="num">Quantidade</th>
+            <th class="num">PU venda</th>
+            <th class="num">Valor</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="carteira-body"></tbody>
+        <tfoot>
+          <tr>
+            <td colspan="3">Total da carteira</td>
+            <td class="num" id="carteira-total">R$ 0,00</td>
+            <td></td>
+          </tr>
+        </tfoot>
+      </table>
+      <div class="empty-state" id="carteira-vazia">Sua carteira está vazia. Adicione um título acima.</div>
+    </div>
+
+    <!-- CENÁRIOS -->
+    <div class="tab-panel" id="tab-cenarios">
+      <div class="desc" style="margin-bottom:16px">
+        Simulação simplificada: aplica uma variação percentual uniforme sobre o PU de venda de cada título da carteira, para estimar o potencial de ganho ou perda.
+      </div>
+
+      <div class="scenario-controls">
+        <label style="margin:0">Cenário personalizado</label>
+        <input type="range" id="slider-cenario" min="-30" max="30" value="0" step="1">
+        <div class="pct-val" id="slider-valor">0%</div>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Cenário (variação do PU)</th>
+            <th class="num">Valor da carteira</th>
+            <th class="num">Ganho / Perda</th>
+          </tr>
+        </thead>
+        <tbody id="cenarios-body"></tbody>
+      </table>
+      <div class="empty-state" id="cenarios-vazia">Adicione títulos à carteira para simular cenários.</div>
+
+      <div class="footnote">
+        Esta simulação assume que <b>todos os títulos da carteira variam na mesma proporção</b>. Na prática, títulos com vencimentos mais longos costumam ter maior sensibilidade a mudanças de taxa de juros (duration mais alta) do que os de vencimento mais curto — o cenário real tende a afetá-los de forma desigual.
+      </div>
+    </div>
+  </div>
+
+  <div class="footnote">
+    PU de venda extraído do arquivo oficial do Tesouro Nacional (histórico de preços e taxas — NTN-B Principal 2026), atualizado automaticamente todo dia útil por um robô. A carteira fica salva neste navegador (não é enviada para nenhum servidor).
+  </div>
+</div>
+
+<script>
+  // ---------- DADOS ----------
+  // Estes valores só são usados se o dados.json não puder ser carregado
+  // (ex: abrindo o arquivo localmente, sem o site publicado no GitHub Pages).
+  const DADOS_FALLBACK = [
+    { vencimento: "15/08/2026", puVenda: 4684.20, dataRef: "07/07/2026" },
+    { vencimento: "15/05/2029", puVenda: 3757.77, dataRef: "07/07/2026" },
+    { vencimento: "15/08/2032", puVenda: 2907.41, dataRef: "07/07/2026" },
+    { vencimento: "15/05/2035", puVenda: 2376.95, dataRef: "07/07/2026" },
+    { vencimento: "15/08/2040", puVenda: 1662.04, dataRef: "07/07/2026" },
+    { vencimento: "15/05/2045", puVenda: 1229.39, dataRef: "07/07/2026" },
+    { vencimento: "15/08/2050", puVenda:  859.36, dataRef: "07/07/2026" },
+  ];
+
+  let DADOS = DADOS_FALLBACK;
+
+  const CENARIOS_PRESET = [-20, -15, -10, -5, 0, 5, 10, 15, 20];
+
+  // ---------- ESTADO ----------
+  let carteira = JSON.parse(localStorage.getItem('carteira_ntnb') || '[]');
+
+  function salvarCarteira(){
+    localStorage.setItem('carteira_ntnb', JSON.stringify(carteira));
+  }
+
+  function formatBRL(v){
+    return v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+  }
+  function formatPct(v){
+    const sinal = v > 0 ? '+' : '';
+    return `${sinal}${v}%`;
+  }
+
+  // ---------- FORM: ADICIONAR TÍTULO ----------
+  const selVencimento = document.getElementById('vencimento');
+  const inputQtd = document.getElementById('quantidade');
+  const outPuVenda = document.getElementById('pu-venda');
+  const outDataRef = document.getElementById('data-ref');
+  const outTotal = document.getElementById('valor-total');
+
+  function popularSelect(){
+    selVencimento.innerHTML = '';
+    DADOS.forEach((d, i) => {
+      const opt = document.createElement('option');
+      opt.value = i;
+      opt.textContent = `Tesouro IPCA+ ${d.vencimento}`;
+      selVencimento.appendChild(opt);
+    });
+  }
+
+  function atualizarFormulario(){
+    const d = DADOS[selVencimento.value];
+    const qtd = parseFloat(String(inputQtd.value).replace(',', '.')) || 0;
+    const total = qtd * d.puVenda;
+    outPuVenda.textContent = formatBRL(d.puVenda);
+    outDataRef.textContent = d.dataRef;
+    outTotal.textContent = formatBRL(total);
+  }
+
+  selVencimento.addEventListener('change', atualizarFormulario);
+  inputQtd.addEventListener('input', atualizarFormulario);
+
+  document.getElementById('btn-adicionar').addEventListener('click', () => {
+    const idx = parseInt(selVencimento.value);
+    const qtd = parseFloat(String(inputQtd.value).replace(',', '.')) || 0;
+    if (qtd <= 0) return;
+
+    const existente = carteira.find(p => p.idx === idx);
+    if (existente){
+      existente.qtd += qtd;
+    } else {
+      carteira.push({ idx, qtd });
+    }
+    salvarCarteira();
+    renderCarteira();
+    renderCenarios();
+  });
+
+  // ---------- CARTEIRA ----------
+  const carteiraBody = document.getElementById('carteira-body');
+  const carteiraTotalEl = document.getElementById('carteira-total');
+  const carteiraVazia = document.getElementById('carteira-vazia');
+
+  function valorCarteira(variacaoPct = 0){
+    return carteira.reduce((acc, p) => {
+      const d = DADOS[p.idx];
+      const puAjustado = d.puVenda * (1 + variacaoPct / 100);
+      return acc + p.qtd * puAjustado;
+    }, 0);
+  }
+
+  function renderCarteira(){
+    carteiraBody.innerHTML = '';
+
+    if (carteira.length === 0){
+      carteiraVazia.style.display = 'block';
+      document.querySelector('#tab-carteira table').style.display = 'none';
+      carteiraTotalEl.textContent = formatBRL(0);
+      return;
+    }
+    carteiraVazia.style.display = 'none';
+    document.querySelector('#tab-carteira table').style.display = 'table';
+
+    let total = 0;
+    carteira.forEach((p, i) => {
+      const d = DADOS[p.idx];
+      const valor = p.qtd * d.puVenda;
+      total += valor;
+
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>Tesouro IPCA+ ${d.vencimento}</td>
+        <td class="num">${p.qtd.toLocaleString('pt-BR')}</td>
+        <td class="num">${formatBRL(d.puVenda)}</td>
+        <td class="num">${formatBRL(valor)}</td>
+        <td><button class="remove-btn" data-i="${i}">remover</button></td>
+      `;
+      carteiraBody.appendChild(tr);
+    });
+
+    carteiraTotalEl.textContent = formatBRL(total);
+
+    carteiraBody.querySelectorAll('.remove-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        carteira.splice(parseInt(btn.dataset.i), 1);
+        salvarCarteira();
+        renderCarteira();
+        renderCenarios();
+      });
+    });
+  }
+
+  // ---------- CENÁRIOS ----------
+  const cenariosBody = document.getElementById('cenarios-body');
+  const cenariosVazia = document.getElementById('cenarios-vazia');
+  const slider = document.getElementById('slider-cenario');
+  const sliderValor = document.getElementById('slider-valor');
+
+  function renderCenarios(){
+    cenariosBody.innerHTML = '';
+
+    if (carteira.length === 0){
+      cenariosVazia.style.display = 'block';
+      document.querySelector('#tab-cenarios table').style.display = 'none';
+      return;
+    }
+    cenariosVazia.style.display = 'none';
+    document.querySelector('#tab-cenarios table').style.display = 'table';
+
+    const totalAtual = valorCarteira(0);
+    const custom = parseInt(slider.value);
+    let cenarios = [...CENARIOS_PRESET];
+    if (!cenarios.includes(custom)) cenarios.push(custom);
+    cenarios.sort((a,b) => a - b);
+
+    cenarios.forEach(pct => {
+      const valorCenario = valorCarteira(pct);
+      const diff = valorCenario - totalAtual;
+      const classe = diff > 0 ? 'pos' : (diff < 0 ? 'neg' : '');
+
+      const tr = document.createElement('tr');
+      if (pct === custom) tr.style.background = 'var(--accent-soft)';
+      tr.innerHTML = `
+        <td>${formatPct(pct)}${pct === 0 ? ' (atual)' : ''}</td>
+        <td class="num">${formatBRL(valorCenario)}</td>
+        <td class="num ${classe}">${diff >= 0 ? '+' : ''}${formatBRL(diff)}</td>
+      `;
+      cenariosBody.appendChild(tr);
+    });
+  }
+
+  slider.addEventListener('input', () => {
+    sliderValor.textContent = formatPct(parseInt(slider.value));
+    renderCenarios();
+  });
+
+  // ---------- TABS ----------
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(`tab-${btn.dataset.tab}`).classList.add('active');
+    });
+  });
+
+  // ---------- CARREGAR dados.json ----------
+  const updateBadge = document.getElementById('update-badge');
+
+  function formatarDataHora(iso){
+    const d = new Date(iso);
+    return d.toLocaleString('pt-BR', { day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit' });
+  }
+
+  async function carregarDados(){
+    try{
+      const resp = await fetch('dados.json', { cache: 'no-store' });
+      if (!resp.ok) throw new Error('dados.json não encontrado');
+      const json = await resp.json();
+      DADOS = json.titulos;
+      updateBadge.textContent = `Atualizado automaticamente em ${formatarDataHora(json.atualizadoEm)}`;
+      updateBadge.classList.remove('stale');
+    } catch (e){
+      DADOS = DADOS_FALLBACK;
+      updateBadge.textContent = `Usando dados locais (${DADOS_FALLBACK[0].dataRef}) — dados.json não encontrado`;
+      updateBadge.classList.add('stale');
+    }
+
+    popularSelect();
+    atualizarFormulario();
+    renderCarteira();
+    renderCenarios();
+  }
+
+  // ---------- INIT ----------
+  carregarDados();
+</script>
+
+</body>
+</html>
