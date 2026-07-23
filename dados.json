@@ -1,152 +1,152 @@
 {
-  "atualizadoEm": "2026-07-22T07:56:26.941815Z",
+  "atualizadoEm": "2026-07-23T07:59:58.654743Z",
   "titulos": [
     {
       "titulo": "Tesouro IPCA+",
       "vencimento": "15/08/2026",
-      "puVenda": 4701.85,
-      "taxaVenda": 11.79,
-      "dataRef": "21/07/2026"
+      "puVenda": 4704.1,
+      "taxaVenda": 11.85,
+      "dataRef": "22/07/2026"
     },
     {
       "titulo": "Tesouro IPCA+",
       "vencimento": "15/05/2029",
-      "puVenda": 3787.12,
-      "taxaVenda": 8.39,
-      "dataRef": "21/07/2026"
+      "puVenda": 3779.86,
+      "taxaVenda": 8.48,
+      "dataRef": "22/07/2026"
     },
     {
       "titulo": "Tesouro IPCA+",
       "vencimento": "15/08/2032",
-      "puVenda": 2930.29,
-      "taxaVenda": 8.3,
-      "dataRef": "21/07/2026"
+      "puVenda": 2915.16,
+      "taxaVenda": 8.4,
+      "dataRef": "22/07/2026"
     },
     {
       "titulo": "Tesouro IPCA+",
       "vencimento": "15/05/2035",
-      "puVenda": 2398.98,
-      "taxaVenda": 8.09,
-      "dataRef": "21/07/2026"
+      "puVenda": 2380.54,
+      "taxaVenda": 8.19,
+      "dataRef": "22/07/2026"
     },
     {
       "titulo": "Tesouro IPCA+",
       "vencimento": "15/08/2040",
-      "puVenda": 1683.77,
-      "taxaVenda": 7.68,
-      "dataRef": "21/07/2026"
+      "puVenda": 1664.81,
+      "taxaVenda": 7.77,
+      "dataRef": "22/07/2026"
     },
     {
       "titulo": "Tesouro IPCA+",
       "vencimento": "15/05/2045",
-      "puVenda": 1243.22,
-      "taxaVenda": 7.42,
-      "dataRef": "21/07/2026"
+      "puVenda": 1224.34,
+      "taxaVenda": 7.51,
+      "dataRef": "22/07/2026"
     },
     {
       "titulo": "Tesouro IPCA+",
       "vencimento": "15/08/2050",
-      "puVenda": 867.25,
-      "taxaVenda": 7.36,
-      "dataRef": "21/07/2026"
+      "puVenda": 846.56,
+      "taxaVenda": 7.47,
+      "dataRef": "22/07/2026"
     },
     {
       "titulo": "Tesouro Prefixado com Juros Semestrais",
       "vencimento": "01/01/2027",
-      "puVenda": 989.58,
-      "taxaVenda": 13.84,
-      "dataRef": "21/07/2026"
+      "puVenda": 990.01,
+      "taxaVenda": 13.86,
+      "dataRef": "22/07/2026"
     },
     {
       "titulo": "Tesouro Prefixado com Juros Semestrais",
       "vencimento": "01/01/2029",
-      "puVenda": 925.05,
-      "taxaVenda": 14.3,
-      "dataRef": "21/07/2026"
+      "puVenda": 922.88,
+      "taxaVenda": 14.45,
+      "dataRef": "22/07/2026"
     },
     {
       "titulo": "Tesouro Prefixado com Juros Semestrais",
       "vencimento": "01/01/2031",
-      "puVenda": 864.84,
-      "taxaVenda": 14.72,
-      "dataRef": "21/07/2026"
+      "puVenda": 862.06,
+      "taxaVenda": 14.84,
+      "dataRef": "22/07/2026"
     },
     {
       "titulo": "Tesouro Prefixado com Juros Semestrais",
       "vencimento": "01/01/2033",
-      "puVenda": 821.54,
-      "taxaVenda": 14.79,
-      "dataRef": "21/07/2026"
+      "puVenda": 818.64,
+      "taxaVenda": 14.89,
+      "dataRef": "22/07/2026"
     },
     {
       "titulo": "Tesouro Prefixado com Juros Semestrais",
       "vencimento": "01/01/2035",
-      "puVenda": 791.4,
-      "taxaVenda": 14.78,
-      "dataRef": "21/07/2026"
+      "puVenda": 788.04,
+      "taxaVenda": 14.88,
+      "dataRef": "22/07/2026"
     },
     {
       "titulo": "Tesouro Prefixado com Juros Semestrais",
       "vencimento": "01/01/2037",
-      "puVenda": 768.23,
-      "taxaVenda": 14.77,
-      "dataRef": "21/07/2026"
+      "puVenda": 764.57,
+      "taxaVenda": 14.87,
+      "dataRef": "22/07/2026"
     },
     {
       "titulo": "Tesouro Renda+ Aposentadoria Extra",
       "vencimento": "15/12/2049",
-      "puVenda": 1913.8,
-      "taxaVenda": 7.75,
-      "dataRef": "21/07/2026"
+      "puVenda": 1895.13,
+      "taxaVenda": 7.85,
+      "dataRef": "22/07/2026"
     },
     {
       "titulo": "Tesouro Renda+ Aposentadoria Extra",
       "vencimento": "15/12/2054",
-      "puVenda": 1360.46,
-      "taxaVenda": 7.55,
-      "dataRef": "21/07/2026"
+      "puVenda": 1342.87,
+      "taxaVenda": 7.64,
+      "dataRef": "22/07/2026"
     },
     {
       "titulo": "Tesouro Renda+ Aposentadoria Extra",
       "vencimento": "15/12/2059",
-      "puVenda": 979.48,
-      "taxaVenda": 7.38,
-      "dataRef": "21/07/2026"
+      "puVenda": 960.85,
+      "taxaVenda": 7.48,
+      "dataRef": "22/07/2026"
     },
     {
       "titulo": "Tesouro Renda+ Aposentadoria Extra",
       "vencimento": "15/12/2064",
-      "puVenda": 704.54,
-      "taxaVenda": 7.28,
-      "dataRef": "21/07/2026"
+      "puVenda": 687.92,
+      "taxaVenda": 7.38,
+      "dataRef": "22/07/2026"
     },
     {
       "titulo": "Tesouro Renda+ Aposentadoria Extra",
       "vencimento": "15/12/2069",
-      "puVenda": 505.56,
-      "taxaVenda": 7.22,
-      "dataRef": "21/07/2026"
+      "puVenda": 491.33,
+      "taxaVenda": 7.32,
+      "dataRef": "22/07/2026"
     },
     {
       "titulo": "Tesouro Renda+ Aposentadoria Extra",
       "vencimento": "15/12/2074",
-      "puVenda": 362.35,
-      "taxaVenda": 7.18,
-      "dataRef": "21/07/2026"
+      "puVenda": 350.52,
+      "taxaVenda": 7.28,
+      "dataRef": "22/07/2026"
     },
     {
       "titulo": "Tesouro Renda+ Aposentadoria Extra",
       "vencimento": "15/12/2079",
-      "puVenda": 256.7,
-      "taxaVenda": 7.18,
-      "dataRef": "21/07/2026"
+      "puVenda": 247.17,
+      "taxaVenda": 7.28,
+      "dataRef": "22/07/2026"
     },
     {
       "titulo": "Tesouro Renda+ Aposentadoria Extra",
       "vencimento": "15/12/2084",
-      "puVenda": 181.88,
-      "taxaVenda": 7.18,
-      "dataRef": "21/07/2026"
+      "puVenda": 174.31,
+      "taxaVenda": 7.28,
+      "dataRef": "22/07/2026"
     }
   ]
 }
